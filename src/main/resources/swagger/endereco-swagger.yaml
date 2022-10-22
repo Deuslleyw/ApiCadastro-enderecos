@@ -14,9 +14,9 @@ consumes:
   - application/json
 produces:
   - application/json
-paths:
 
-  /cliente-legado/enderecos:
+paths:
+  /enderecos:
     post:
       description: Método para realizar o cadastro dos dados de endereço do cliente
       summary: createAddress
@@ -37,10 +37,8 @@ paths:
             $ref: '#/definitions/EnderecoPessoa'
       responses:
         '201':
-          description: Success
-          schema:
-            type: string
-            default: ''
+          description: Created
+
           headers: {}
         '400':
           description: A requisição foi malformada, omitindo atributos obrigatórios, seja no payload ou através de atributos na URL.
@@ -147,13 +145,13 @@ definitions:
     title: EnderecoPessoa
     type: object
     properties:
-      idEndereco:
+      id:
         description: GUID de identificação de endereco.
         example: 73b32c0d-778b-4592-80f6-bfea4c90ff08
         type: string
         maxLength: 100
         #pattern: '[a-zA-Z0-9][a-zA-Z0-9\-]{1,99}$'
-      idClienteCompleto:
+      idCliente:
         description: GUID de identificação de Cliente.
         example: f3a3c7eafd30e6a85b13de2a146441cadc16d009dbbb03e8ceef5446745a8acc#20
         type: string
