@@ -1,0 +1,249 @@
+swagger: '2.0'
+info:
+  version: '1.0.0'
+  title: API Cadastro
+  description: >
+    API para manutenção de cadastro de clientes.
+  contact: {}
+host: localhost:8080
+basePath: /api/v1/
+securityDefinitions: {}
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+
+  /cliente-legado/enderecos:
+    post:
+      description: Método para realizar o cadastro dos dados de endereço do cliente
+      summary: createAddress
+      tags:
+        - Endereço
+      operationId: createAddress
+      deprecated: false
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: false
+          description: Payload de Request do Endereço.
+          schema:
+            $ref: '#/definitions/EnderecoPessoa'
+      responses:
+        '201':
+          description: Success
+          schema:
+            type: string
+            default: ''
+          headers: {}
+        '400':
+          description: A requisição foi malformada, omitindo atributos obrigatórios, seja no payload ou através de atributos na URL.
+          schema:
+            $ref: '#/definitions/ResponseError'
+          headers: {}
+        '401':
+          description: Cabeçalho de autenticação ausente/inválido ou token inválido
+          schema:
+            $ref: '#/definitions/ResponseError'
+          headers: {}
+        '402':
+          description: Uso da api requer pagamento
+          schema:
+            $ref: '#/definitions/ResponseError'
+          headers: {}
+        '403':
+          description: O token tem escopo incorreto ou uma política de segurança foi violada
+          schema:
+            $ref: '#/definitions/ResponseError'
+          headers: {}
+        '409':
+          description: O recurso solicitado não existe ou não foi implementado
+          schema:
+            $ref: '#/definitions/ResponseError'
+          headers: {}
+        '500':
+          description: Ocorreu um erro no gateway da API ou no microsserviço
+          schema:
+            $ref: '#/definitions/ResponseError'
+          headers: {}
+        '503':
+          description: Servidor temporariamente indisponível
+          schema:
+            $ref: '#/definitions/ResponseError'
+          headers: {}
+      security: []
+    put:
+      description: Método para realizar o cadastro dos dados pessoais do cliente
+      summary: updateAddress
+      tags:
+        - Endereço
+      operationId: updateAddress
+      deprecated: false
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: false
+          description: Payload de put do Cliente.
+          schema:
+            $ref: '#/definitions/EnderecoPessoa'
+      responses:
+        '201':
+          description: Success
+          schema:
+            type: string
+            default: ''
+          headers: {}
+        '400':
+          description: A requisição foi malformada, omitindo atributos obrigatórios, seja no payload ou através de atributos na URL.
+          schema:
+            $ref: '#/definitions/ResponseError'
+          headers: {}
+        '401':
+          description: Cabeçalho de autenticação ausente/inválido ou token inválido
+          schema:
+            $ref: '#/definitions/ResponseError'
+          headers: {}
+        '402':
+          description: Uso da api requer pagamento
+          schema:
+            $ref: '#/definitions/ResponseError'
+          headers: {}
+        '403':
+          description: O token tem escopo incorreto ou uma política de segurança foi violada
+          schema:
+            $ref: '#/definitions/ResponseError'
+          headers: {}
+        '409':
+          description: O recurso solicitado não existe ou não foi implementado
+          schema:
+            $ref: '#/definitions/ResponseError'
+          headers: {}
+        '500':
+          description: Ocorreu um erro no gateway da API ou no microsserviço
+          schema:
+            $ref: '#/definitions/ResponseError'
+          headers: {}
+        '503':
+          description: Servidor temporariamente indisponível
+          schema:
+            $ref: '#/definitions/ResponseError'
+          headers: {}
+      security: []
+
+definitions:
+
+
+  EnderecoPessoa:
+    title: EnderecoPessoa
+    type: object
+    properties:
+      idEndereco:
+        description: GUID de identificação de endereco.
+        example: 73b32c0d-778b-4592-80f6-bfea4c90ff08
+        type: string
+        maxLength: 100
+        #pattern: '[a-zA-Z0-9][a-zA-Z0-9\-]{1,99}$'
+      idClienteCompleto:
+        description: GUID de identificação de Cliente.
+        example: f3a3c7eafd30e6a85b13de2a146441cadc16d009dbbb03e8ceef5446745a8acc#20
+        type: string
+        maxLength: 100
+      tipo_endereco:
+        description: Código Tipo Endereço Pessoa
+        type: number
+        format: double
+      cep:
+        description: Código Localização Postal Pessoa
+        example: 04794-000
+        type: string
+        maxLength: 9
+        #pattern: '\d{5}-\d{3}$'
+      numero_logradouro:
+        description: Número Logradouro Endereço Pessoa
+        example: '14171'
+        type: string
+        maxLength: 8
+      complemento_logradouro:
+        description: Descrição Complemento Logradouro Endereço Pessoa
+        example: 18° andar
+        type: string
+        maxLength: 150
+      logradouro:
+        description: Descrição Logradouro Endereço Pessoa
+        example: Av. das Nações Unidas
+        type: string
+        maxLength: 255
+      bairro_logradouro:
+        description: Descrição Bairro Logradouro Endereço Pessoa
+        example: Vila Gertrudes
+        type: string
+        maxLength: 150
+      cidade_logradouro:
+        description: Descrição Cidade Logradouro Endereço Pessoa
+        example: São Paulo
+        type: string
+        maxLength: 255
+      uf_logradouro:
+        description: Descrição UF Logradouro Endereço Pessoa
+        example: SP
+        type: string
+        maxLength: 2
+        #pattern: '[a-zA-Z]{2}$'
+      pais_logradouro:
+        description: Descrição Pais Logradouro Endereço Pessoa
+        example: Bra
+        type: string
+        maxLength: 3
+        #pattern: '[a-zA-Z]{3}$'
+
+
+  ResponseError:
+    title: ResponseError
+    type: object
+    properties:
+      correlationId:
+        description: Código de identificação da request
+        type: string
+        maxLength: 255
+      fault:
+        $ref: '#/definitions/Fault'
+    required:
+      - correlationId
+      - fault
+
+  Fault:
+    title: Fault
+    type: object
+    properties:
+      code:
+        description: Código de erro específico do endpoint
+        type: string
+        maxLength: 255
+      type:
+        description: Título legível por humanos deste erro específico
+        type: string
+        maxLength: 255
+      message:
+        description: Descrição legível por humanos deste erro específico
+        type: string
+        maxLength: 2048
+    required:
+      - code
+      - type
+      - message
+
+tags:
+
+  - name: Endereço
+
+    description: ''
