@@ -23,4 +23,6 @@ public class RequestEnderecoMapper {
                 .build();
 
     }
-}
+
+    }
+

@@ -21,10 +21,17 @@ public class EnderecoController implements EnderecosApi {
     @Override
     public ResponseEntity<Void> createAddress(EnderecoPessoaModel endereco) {
         var enderecoMapper = RequestEnderecoMapper.toEndereco(endereco);
-
         enderecoService.create(enderecoMapper);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @Override
+    public ResponseEntity<String> updateAddress(EnderecoPessoaModel endereco) {
+        var enderecoMapper2 = RequestEnderecoMapper.toEndereco(endereco);
+        enderecoService.update(enderecoMapper2);
+
+        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
 
 }
