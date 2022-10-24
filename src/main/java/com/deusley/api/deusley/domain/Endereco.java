@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Getter
@@ -16,7 +17,7 @@ import javax.persistence.Table;
 @Table(name = "TB_ENDERECO")
 public class Endereco {
 
-    @Column(name = "TIPO_ENDERECO")
+    @Id
     private String idEndereco ;
 
     @Column(name = "ID_CLIENTE")

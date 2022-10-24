@@ -18,7 +18,7 @@ public class EnderecoServiceImpl implements EnderecoService {
         try {
             enderecoRepository.save(endereco);
 
-        }catch (Exception exception){
+        } catch (Exception exception) {
             System.out.println("Erro ao salvar");
         }
 
@@ -27,5 +27,10 @@ public class EnderecoServiceImpl implements EnderecoService {
     @Override
     public void update(Endereco endereco) {
 
-    }
-}
+        try {
+            enderecoRepository.save(endereco);
+
+        } catch (Exception exception) {
+            System.out.println("Erro ao atualizar");
+        }
+    }}
